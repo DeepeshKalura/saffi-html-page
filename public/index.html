@@ -69,7 +69,7 @@
         .querySelectorAll(".phone-number")
         .forEach((el) => (el.textContent = phoneNumber));
 
-      const userPreferredLanguage = localStorage.getItem('language') || "fi";
+      const userPreferredLanguage = localStorage.getItem('language') || "en";
       langData = await fetchLanguageData(userPreferredLanguage);
       updateContent(langData);
     });
@@ -156,27 +156,29 @@
 
   <!-- Services section -->
   <section id="services" class="py-16 bg-gray-100">
-    <div class="container mx-auto">
-      <h2 class="text-3xl font-bold mb-8 text-center text-green-700" data-i18n="offeringLine">
-      </h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+    <div class="container mx-auto ">
+      <h2 class="text-3xl font-bold mb-8 text-green-700 text-center" data-i18n="offeringLine"></h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
         <div class="bg-white p-8 rounded-lg shadow-lg">
-          <h3 class="text-2xl font-bold mb-4 text-green-700" data-i18n="serviceOne">
+          <img src="./assets/image_4.jpg" alt="" srcset="">
+          <h3 class=" text-xl font-bold mb-4" data-i18n="serviceOne">
           </h3>
           <p data-i18n="serviceOneAbout"></p>
         </div>
         <div class="bg-white p-8 rounded-lg shadow-lg">
-          <h3 class="text-2xl font-bold mb-4 text-green-700" data-i18n="serviceTwo">
-          </h3>
+          <img src="./assets/image_3.jpg" alt="" srcset="">
+          <h3 class="text-xl font-bold mb-4" data-i18n="serviceTwo"></h3>
           <p data-i18n="serviceTwoAbout"></p>
         </div>
         <div class="bg-white p-8 rounded-lg shadow-lg">
-          <h3 class="text-2xl font-bold mb-4 text-green-700" data-i18n="servciceThree">
-          </h3>
+          <img src="./assets/image_2.jpg" alt="" srcset="">
+          <h3 class="text-xl font-bold mb-4" data-i18n="serviceThree"></h3>
           <p data-i18n="serviceThreeAbout"></p>
         </div>
       </div>
-    </div>
+
+
   </section>
 
   <!-- About Us section -->
