@@ -1,5 +1,6 @@
 {
   "navHome": "Home",
+  "navAppointment": "Appointments",
   "navServices": "Services",
   "navAboutUs": "About Us",
   "navContactUs": "Contact Us",
@@ -36,4 +37,3 @@
   "authorThree": "Elina K.",
   "locationThree": "Tampere"
 }
-
