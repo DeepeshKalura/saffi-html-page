@@ -42,3 +42,20 @@
     transition: transform 0.4s;
     border-radius: 50%;
 }
+
+
+.bg-light-green {
+    background-color: #def9c4;
+}
+
+.bg-medium-green {
+    background-color: #9cdba6;
+}
+
+.bg-dark-green {
+    background-color: #50b498;
+}
+
+.bg-darker-green {
+    background-color: #468585;
+}

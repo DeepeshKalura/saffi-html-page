@@ -58,17 +58,28 @@
       // TODO: Change to the company's phone number
       const phoneNumber = "+91 9897948055";
 
-      async function fetchLanguageData(lang) {
-        const response = await fetch(`language/${lang}.json`);
-        return response.json();
-      }
-
+      document.getElementById("language-toggle").addEventListener("change", (e) => {
+        const lang = e.target.checked ? "en" : "fi";
+        changeLanguage(lang);
+      });
       document
         .querySelectorAll(".phone-number")
         .forEach((el) => (el.textContent = phoneNumber));
 
       const userPreferredLanguage = localStorage.getItem("language") || "fi";
+
+
       langData = await fetchLanguageData(userPreferredLanguage);
+      if (userPreferredLanguage === "fi") {
+        document.getElementById("language-toggle").checked = false;
+        document.getElementById("fi").classList.add("hidden");
+        document.getElementById("en").classList.remove("hidden");
+      } else {
+        document.getElementById("language-toggle").checked = true;
+        document.getElementById("en").classList.add("hidden");
+
+        document.getElementById("fi").classList.remove("hidden");
+      }
       updateContent(langData);
     });
 
@@ -90,24 +101,12 @@
       updateContent(langData);
     }
 
+    async function fetchLanguageData(lang) {
+      const response = await fetch(`language/${lang}.json`);
+      return response.json();
+    }
+
   </script>
-  <style>
-    .bg-light-green {
-      background-color: #def9c4;
-    }
-
-    .bg-medium-green {
-      background-color: #9cdba6;
-    }
-
-    .bg-dark-green {
-      background-color: #50b498;
-    }
-
-    .bg-darker-green {
-      background-color: #468585;
-    }
-  </style>
 </head>
 
 <body>
@@ -160,7 +159,6 @@
             <input type="checkbox" id="language-toggle" class="hidden">
             <span class="slider round block w-10 h-6 bg-gray-300 rounded-full shadow-inner"></span>
           </label>
-          <span id="toggle-text" class="absolute left-2 top-1 text-xs font-bold text-gray-700"></span>
           <span id="fi" class="hidden absolute left-[-25px] top-1 text-xs font-bold text-white">FN</span>
           <span id="en" class="absolute right-0 top-1 text-xs font-bold text-white ">EN</span>
         </div>
