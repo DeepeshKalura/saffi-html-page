@@ -1,300 +1,239 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Safai</title>
+<html>
 
-    <!-- Firebase SDK and other scripts -->
-    <script defer src="/__/firebase/10.12.4/firebase-app-compat.js"></script>
-    <script defer src="/__/firebase/10.12.4/firebase-auth-compat.js"></script>
-    <script
-      defer
-      src="/__/firebase/10.12.4/firebase-database-compat.js"
-    ></script>
-    <script
-      defer
-      src="/__/firebase/10.12.4/firebase-firestore-compat.js"
-    ></script>
-    <script
-      defer
-      src="/__/firebase/10.12.4/firebase-functions-compat.js"
-    ></script>
-    <script
-      defer
-      src="/__/firebase/10.12.4/firebase-messaging-compat.js"
-    ></script>
-    <script
-      defer
-      src="/__/firebase/10.12.4/firebase-storage-compat.js"
-    ></script>
-    <script
-      defer
-      src="/__/firebase/10.12.4/firebase-analytics-compat.js"
-    ></script>
-    <script
-      defer
-      src="/__/firebase/10.12.4/firebase-remote-config-compat.js"
-    ></script>
-    <script
-      defer
-      src="/__/firebase/10.12.4/firebase-performance-compat.js"
-    ></script>
-    <script defer src="/__/firebase/init.js?useEmulator=true"></script>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Safai</title>
 
-    <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Firebase SDK and other scripts -->
+  <script defer src="/__/firebase/10.12.4/firebase-app-compat.js"></script>
+  <script defer src="/__/firebase/10.12.4/firebase-auth-compat.js"></script>
+  <script defer src="/__/firebase/10.12.4/firebase-database-compat.js"></script>
+  <script defer src="/__/firebase/10.12.4/firebase-firestore-compat.js"></script>
+  <script defer src="/__/firebase/10.12.4/firebase-functions-compat.js"></script>
+  <script defer src="/__/firebase/10.12.4/firebase-messaging-compat.js"></script>
+  <script defer src="/__/firebase/10.12.4/firebase-storage-compat.js"></script>
+  <script defer src="/__/firebase/10.12.4/firebase-analytics-compat.js"></script>
+  <script defer src="/__/firebase/10.12.4/firebase-remote-config-compat.js"></script>
+  <script defer src="/__/firebase/10.12.4/firebase-performance-compat.js"></script>
+  <script defer src="/__/firebase/init.js?useEmulator=true"></script>
 
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
-      integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    />
+  <script src="https://cdn.tailwindcss.com"></script>
 
-    <!-- Google Analytics and Tag Manager -->
-    <script
-      async
-      src="https://www.googletagmanager.com/gtag/js?id=G-W6HYGV31E1"
-    ></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag() {
-        dataLayer.push(arguments);
-      }
-      gtag("js", new Date());
-      gtag("config", "G-W6HYGV31E1");
-    </script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+    integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-    <script>
-      (function (w, d, s, l, i) {
-        w[l] = w[l] || [];
-        w[l].push({
-          "gtm.start": new Date().getTime(),
-          event: "gtm.js",
-        });
-        var f = d.getElementsByTagName(s)[0],
-          j = d.createElement(s),
-          dl = l != "dataLayer" ? "&l=" + l : "";
-        j.async = true;
-        j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
-        f.parentNode.insertBefore(j, f);
-      })(window, document, "script", "dataLayer", "GTM-TPJ5KBRN");
-    </script>
+  <!-- Google Analytics and Tag Manager -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-W6HYGV31E1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag("js", new Date());
+    gtag("config", "G-W6HYGV31E1");
+  </script>
 
-    <script defer>
-      document.addEventListener("DOMContentLoaded", () => {
-        const phoneNumber = "+91 9897948055";
-        document
-          .querySelectorAll(".phone-number")
-          .forEach((el) => (el.textContent = phoneNumber));
+  <script>
+    (function (w, d, s, l, i) {
+      w[l] = w[l] || [];
+      w[l].push({
+        "gtm.start": new Date().getTime(),
+        event: "gtm.js",
       });
-    </script>
-  </head>
+      var f = d.getElementsByTagName(s)[0],
+        j = d.createElement(s),
+        dl = l != "dataLayer" ? "&l=" + l : "";
+      j.async = true;
+      j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
+      f.parentNode.insertBefore(j, f);
+    })(window, document, "script", "dataLayer", "GTM-TPJ5KBRN");
+  </script>
 
-  <body>
-    <!-- Google Tag Manager (noscript) -->
-    <noscript>
-      <iframe
-        src="https://www.googletagmanager.com/ns.html?id=GTM-TPJ5KBRN"
-        height="0"
-        width="0"
-        style="display: none; visibility: hidden"
-      ></iframe>
-    </noscript>
+  <script defer>
+    document.addEventListener("DOMContentLoaded", async () => {
+      // TODO: Change to the company's phone number 
+      const phoneNumber = "+91 9897948055";
 
-    <!-- Top bar with contact info -->
-    <div class="bg-[#468585] py-2 px-4 md:px-32 text-white">
-      <div class="flex flex-col md:flex-row justify-between items-center">
-        <p class="text-sm md:text-base">
-          <a href="tel:+919897948055" class="hover:text-gray-300"
-            >+91 9897948055</a
-          >
-          |
-          <a href="mailto:talk@shafai.fi" class="hover:text-gray-300"
-            >talk@shafai.fi</a
-          >
+
+      async function fetchLanguageData(lang) {
+
+        const response = await fetch(`language/${lang}.json`);
+        return response.json();
+      }
+
+
+      document
+        .querySelectorAll(".phone-number")
+        .forEach((el) => (el.textContent = phoneNumber));
+
+      const userPreferredLanguage = localStorage.getItem('language') || "fi";
+      langData = await fetchLanguageData(userPreferredLanguage);
+      updateContent(langData);
+    });
+
+    function setLanguagePreference(lang) {
+      localStorage.setItem('language', lang);
+      location.reload();
+    }
+
+    function updateContent(langData) {
+      document.querySelectorAll('[data-i18n]').forEach(element => {
+        const key = element.getAttribute('data-i18n');
+        element.textContent = langData[key];
+      });
+    }
+    async function changeLanguage(lang) {
+      await setLanguagePreference(lang);
+
+      const langData = await fetchLanguageData(lang);
+      updateContent(langData);
+    }
+
+  </script>
+</head>
+
+<body>
+  <!-- Google Tag Manager (noscript) -->
+  <noscript>
+    <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TPJ5KBRN" height="0" width="0"
+      style="display: none; visibility: hidden"></iframe>
+  </noscript>
+
+  <!-- Top bar with contact info -->
+  <div class="bg-green-600 py-2 px-4 md:px-32 text-white">
+    <div class="flex flex-col md:flex-row justify-between items-center">
+      <p class="text-sm md:text-base">
+        <a href="tel:+919897948055" class="hover:text-gray-300">+91 9897948055</a>
+        |
+        <a href="mailto:talk@shafai.fi" class="hover:text-gray-300">talk@shafai.fi</a>
+      </p>
+      <div class="flex space-x-4 mt-2 md:mt-0">
+        <a href="#" class="hover:text-gray-300"><i class="fab fa-facebook"></i></a>
+        <a href="#" class="hover:text-gray-300"><i class="fab fa-twitter"></i></a>
+        <a href="https://www.instagram.com/safai.service/?igsh=eXNsc201bm1oMzYy" class="hover:text-gray-300"><i
+            class="fab fa-instagram"></i></a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Navigation and header -->
+  <header class="relative">
+    <nav class="bg-black bg-opacity-30 backdrop-filter backdrop-blur-md sticky top-0 z-20">
+      <div class="container mx-auto flex justify-between items-center py-4 px-4 md:px-32">
+        <a href="#" class="text-2xl font-bold text-white">Safai</a>
+        <button id="menu-toggle" class="text-white md:hidden">
+          <i class="fas fa-bars"></i>
+        </button>
+        <div id="menu" class="hidden md:flex space-x-6 ">
+          <a href="#home" class="text-white hover:text-[#468585]" data-i18n="navHome"></a>
+          <a href="#services" class="text-white hover:text-[#468585]" data-i18n="navServices"></a>
+          <a href="#about" class="text-white hover:text-[#468585]" data-i18n="navAboutUs"></a>
+          <a href="#contact" class="text-white hover:text-[#468585]" data-i18n="navContactUs"></a>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Hero section -->
+  <section id="home"
+    class="md:bg-cover bg-opacity-50 md:bg-[url('./assets/bg_1.jpg')] bg-cover bg-[url('https://images.unsplash.com/photo-1718152423985-2d7909a96fa1?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')] mx-auto h-screen"
+    data-stellar-background-ratio="0.5">
+    <div class="absolute inset-0 "></div>
+    <div class="container mx-auto h-full flex items-center justify-start px-4 md:px-32">
+      <div class="bg-white bg-opacity-80 p-8 rounded-lg shadow-lg w-full md:w-1/2">
+        <h1 class="text-4xl md:text-5xl font-bold mb-4 text-green-800" data-i18n="navTagline">
+        </h1>
+        <p class="text-lg md:text-xl mb-6" data-i18n="ourneedLine">
         </p>
-        <div class="flex space-x-4 mt-2 md:mt-0">
-          <a href="#" class="hover:text-gray-300"
-            ><i class="fab fa-facebook"></i
-          ></a>
-          <a href="#" class="hover:text-gray-300"
-            ><i class="fab fa-twitter"></i
-          ></a>
-          <a
-            href="https://www.instagram.com/safai.service/?igsh=eXNsc201bm1oMzYy"
-            class="hover:text-gray-300"
-            ><i class="fab fa-instagram"></i
-          ></a>
+        <a href="#contact" class="bg-green-600 text-white py-3 px-6 rounded-lg text-lg font-semibold inline-block"
+          data-i18n="whatyoudoLine"> </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services section -->
+  <section id="services" class="py-16 bg-gray-100">
+    <div class="container mx-auto">
+      <h2 class="text-3xl font-bold mb-8 text-center text-green-700" data-i18n="offeringLine">
+      </h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="bg-white p-8 rounded-lg shadow-lg">
+          <h3 class="text-2xl font-bold mb-4 text-green-700" data-i18n="serviceOne">
+          </h3>
+          <p data-i18n="serviceOneAbout"></p>
+        </div>
+        <div class="bg-white p-8 rounded-lg shadow-lg">
+          <h3 class="text-2xl font-bold mb-4 text-green-700" data-i18n="serviceTwo">
+          </h3>
+          <p data-i18n="serviceTwoAbout"></p>
+        </div>
+        <div class="bg-white p-8 rounded-lg shadow-lg">
+          <h3 class="text-2xl font-bold mb-4 text-green-700" data-i18n="servciceThree">
+          </h3>
+          <p data-i18n="serviceThreeAbout"></p>
         </div>
       </div>
     </div>
+  </section>
 
-    <!-- Navigation and header -->
-    <header class="relative">
-      <nav
-        class="bg-black bg-opacity-30 backdrop-filter backdrop-blur-md sticky top-0 z-20"
-      >
-        <div
-          class="container mx-auto flex justify-between items-center py-4 px-4 md:px-32"
-        >
-          <a href="#" class="text-2xl font-bold text-white">Safai</a>
-          <button id="menu-toggle" class="text-white md:hidden">
-            <i class="fas fa-bars"></i>
+  <!-- About Us section -->
+  <section id="about" class="py-16 bg-white">
+    <div class="container mx-auto text-center">
+      <h2 class="text-3xl font-bold mb-8 text-green-700" data-i18n="aboutUsSection"></h2>
+      <p class="text-lg max-w-2xl mx-auto" data-i18n="aboutUsLiner">
+      </p>
+    </div>
+  </section>
+
+  <!-- Contact Us section -->
+  <section id="contact" class="py-16 bg-gray-100">
+    <div class="container mx-auto">
+      <h2 class="text-3xl font-bold mb-8 text-center text-green-700">
+        Contact Us
+      </h2>
+      <form class="max-w-lg mx-auto bg-white p-8 rounded-lg shadow-lg">
+        <div class="mb-4">
+          <label for="name" class="block text-lg font-bold mb-2">Name</label>
+          <input type="text" id="name" class="w-full border border-gray-300 p-3 rounded-lg" required />
+        </div>
+        <div class="mb-4">
+          <label for="email" class="block text-lg font-bold mb-2">Email</label>
+          <input type="email" id="email" class="w-full border border-gray-300 p-3 rounded-lg" required />
+        </div>
+        <div class="mb-4">
+          <label for="message" class="block text-lg font-bold mb-2 resize-none">Message</label>
+          <textarea id="message" class="w-full border border-gray-300 p-3 rounded-lg" rows="4" required></textarea>
+        </div>
+        <div class="flex justify-center">
+          <button type="submit" class="bg-green-600 text-white py-3 px-6 rounded-lg font-semibold "
+            data-i18n="buttonEndMessage">
           </button>
-          <div id="menu" class="hidden md:flex space-x-6 ">
-            <a href="#home" class="text-white hover:text-[#468585]">Home</a>
-            <a href="#services" class="text-white hover:text-[#468585]"
-              >Services</a
-            >
-            <a href="#about" class="text-white hover:text-[#468585]"
-              >About Us</a
-            >
-            <a href="#contact" class="text-white hover:text-[#468585]"
-              >Contact Us</a
-            >
-          </div>
         </div>
-      </nav>
-    </header>
+      </form>
+      <p class="text-center mt-8">
+        Or call us now at: <span class="phone-number font-bold"></span>
+      </p>
+    </div>
+  </section>
 
-    <!-- Hero section -->
-    <section
-      id="home"
-      class="md:bg-cover bg-opacity-50 md:bg-[url('./assets/bg_1.jpg')] bg-cover bg-[url('https://images.unsplash.com/photo-1718152423985-2d7909a96fa1?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')] mx-auto h-screen"
-      data-stellar-background-ratio="0.5"
-    >
-      <div class="absolute inset-0 "></div>
-      <div
-        class="container mx-auto h-full flex items-center justify-start px-4 md:px-32"
-      >
-        <div
-          class="bg-white bg-opacity-80 p-8 rounded-lg shadow-lg w-full md:w-1/2"
-        >
-          <h1 class="text-4xl md:text-5xl font-bold mb-4 text-[#468585]">
-            Let us do the dirty work, so you don't have to.
-          </h1>
-          <p class="text-lg md:text-xl mb-6">
-            Leave the house cleaning chores to us.
-          </p>
-          <a
-            href="#contact"
-            class="bg-[#468585] text-white py-3 px-6 rounded-lg text-lg font-semibold inline-block"
-            >Call Us Now: <span class="phone-number"></span
-          ></a>
-        </div>
-      </div>
-    </section>
+  <!-- Footer -->
+  <footer class="bg-green-700 text-white py-4">
+    <div class="container mx-auto text-center">
+      <p>&copy; 2024 Safai. All rights reserved.</p>
+    </div>
+  </footer>
 
-    <!-- Services section -->
-    <section id="services" class="py-16 bg-gray-100">
-      <div class="container mx-auto">
-        <h2 class="text-3xl font-bold mb-8 text-center text-[##468585]">
-          Our Services
-        </h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          <div class="bg-white p-8 rounded-lg shadow-lg">
-            <h3 class="text-2xl font-bold mb-4 text-[##468585]">
-              Residential Cleaning
-            </h3>
-            <p>Comprehensive cleaning for your home.</p>
-          </div>
-          <div class="bg-white p-8 rounded-lg shadow-lg">
-            <h3 class="text-2xl font-bold mb-4 text-[##468585]">
-              Office Cleaning
-            </h3>
-            <p>Professional cleaning for your office space.</p>
-          </div>
-          <div class="bg-white p-8 rounded-lg shadow-lg">
-            <h3 class="text-2xl font-bold mb-4 text-[##468585]">
-              Deep Cleaning
-            </h3>
-            <p>Thorough cleaning for every corner of your premises.</p>
-          </div>
-        </div>
-      </div>
-    </section>
+  <script>
+    // Toggle the mobile menu
+    document
+      .getElementById("menu-toggle")
+      .addEventListener("click", function () {
+        document.getElementById("menu").classList.toggle("hidden");
+      });
+  </script>
+</body>
 
-    <!-- About Us section -->
-    <section id="about" class="py-16 bg-white">
-      <div class="container mx-auto text-center">
-        <h2 class="text-3xl font-bold mb-8 text-[##468585]">About Us</h2>
-        <p class="text-lg max-w-2xl mx-auto">
-          We are a team of dedicated cleaning professionals with years of
-          experience in providing top-quality cleaning services. Our mission is
-          to make your spaces spotless and comfortable.
-        </p>
-      </div>
-    </section>
-
-    <!-- Contact Us section -->
-    <section id="contact" class="py-16 bg-gray-100">
-      <div class="container mx-auto">
-        <h2 class="text-3xl font-bold mb-8 text-center text-[##468585]">
-          Contact Us
-        </h2>
-        <form class="max-w-lg mx-auto bg-white p-8 rounded-lg shadow-lg">
-          <div class="mb-4">
-            <label for="name" class="block text-lg font-bold mb-2">Name</label>
-            <input
-              type="text"
-              id="name"
-              class="w-full border border-gray-300 p-3 rounded-lg"
-              required
-            />
-          </div>
-          <div class="mb-4">
-            <label for="email" class="block text-lg font-bold mb-2"
-              >Email</label
-            >
-            <input
-              type="email"
-              id="email"
-              class="w-full border border-gray-300 p-3 rounded-lg"
-              required
-            />
-          </div>
-          <div class="mb-4">
-            <label for="message" class="block text-lg font-bold mb-2 resize-none"
-              >Message</label
-            >
-            <textarea
-              id="message"
-              class="w-full border border-gray-300 p-3 rounded-lg"
-              rows="4"
-              required
-            ></textarea>
-          </div>
-          <div class="flex justify-center">
-            <button
-            type="submit"
-            class="bg-[#468585] text-white py-3 px-6 rounded-lg font-semibold "
-          >
-            Send Message
-          </button>
-          </div>
-        </form>
-        <p class="text-center mt-8">
-          Or call us now at: <span class="phone-number font-bold"></span>
-        </p>
-      </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="bg-[##468585] text-white py-4">
-      <div class="container mx-auto text-center">
-        <p>&copy; 2024 Safai. All rights reserved.</p>
-      </div>
-    </footer>
-
-    <script>
-      // Toggle the mobile menu
-      document
-        .getElementById("menu-toggle")
-        .addEventListener("click", function () {
-          document.getElementById("menu").classList.toggle("hidden");
-        });
-    </script>
-  </body>
 </html>
