@@ -56,7 +56,7 @@
   <script defer>
     document.addEventListener("DOMContentLoaded", async () => {
       // TODO: Change to the company's phone number
-      const phoneNumber = "+91 9897948055";
+      const phoneNumber = "+919897948055";
 
       document.getElementById("language-toggle").addEventListener("change", (e) => {
         const lang = e.target.checked ? "en" : "fi";
@@ -81,6 +81,38 @@
         document.getElementById("fi").classList.remove("hidden");
       }
       updateContent(langData);
+
+      //  Make a call to the user 
+      try {
+        document
+          .getElementById("menu-toggle")
+          .addEventListener("click", function () {
+            document.getElementById("menu").classList.toggle("hidden");
+          });
+      } catch (error) {
+        console.log(error + "The logic reason menu is hidden so it is not working");
+      }
+      document.getElementById("call-button").addEventListener("click", function () {
+        makeCall(+919897948055); // Replace with the actual phone number
+      });
+
+      // call the person
+      function makeCall(phoneNumber) {
+        window.location.href = `tel:${phoneNumber}`;
+      }
+
+      function sendEmail() {
+        const name = document.getElementById('name').value;
+        const phone = document.getElementById('phone').value;
+        const services = document.getElementById('services').value;
+        const address = document.getElementById('address').value;
+
+        const subject = encodeURIComponent('Appointment Booking');
+        const body = encodeURIComponent(`Name: ${name}\nPhone: ${phone}\nServices: ${services}\nAddress: ${address}`);
+
+        const mailtoLink = `mailto:admin@safai.fi?subject=${subject}&body=${body}`;
+        window.location.href = mailtoLink;
+      }
     });
 
     function setLanguagePreference(lang) {
@@ -122,7 +154,7 @@
       <p class="text-sm md:text-base">
         <a href="tel:+919897948055" class="hover:text-gray-300">+91 9897948055</a>
         |
-        <a href="mailto:talk@shafai.fi" class="hover:text-gray-300">talk@shafai.fi</a>
+        <a href="mailto:admin@shafai.fi" class="hover:text-gray-300">admin@shafai.fi</a>
       </p>
       <div class="flex space-x-4 mt-2 md:mt-0">
         <a href="#" class="hover:text-gray-300"><i class="fab fa-facebook"></i></a>
@@ -140,8 +172,8 @@
         <div>
           <a href="#" class="text-2xl font-bold text-white">Safai</a>
         </div>
-        <button id="menu-toggle" class="text-white md:hidden">
-          <i class="fas fa-bars"></i>
+        <button id="menu-toggle" class="text-white md:hidden" title="Toggle Menu"></button>
+        <i class="fas fa-bars"></i>
         </button>
         <div id="menu" class="hidden md:flex flex-col md:flex-row mt-4 md:mt-0 w-full md:w-auto">
           <a href="#home" class="block md:inline-block mr-0 md:mr-4 text-white hover:text-[#468585]" data-i18n="navHome"
@@ -176,9 +208,9 @@
       <div class="bg-white bg-opacity-80 p-8 rounded-lg shadow-lg w-full md:w-1/2">
         <h1 class="text-4xl md:text-5xl font-bold mb-4 text-[#468585]" data-i18n="navTagline"></h1>
         <p class="text-lg md:text-xl mb-16" data-i18n="ourneedLine"></p>
-        <a href="#contact" class="bg-[#468585] text-white py-3 px-6 rounded-lg text-lg font-semibold inline-block"
+        <Button id="call-button" class="bg-[#468585] text-white py-3 px-6 rounded-lg text-lg font-semibold inline-block"
           data-i18n="whatyoudoLine" title="contactus">
-        </a>
+        </Button>
       </div>
     </div>
   </section>
@@ -199,7 +231,7 @@
         </div>
         <div class="w-full md:w-1/5">
           <label for="services" class="block text-lg font-bold mb-2 text-[#468585]" data-i18n="inputServices"></label>
-          <select id="services" class="w-full shadow-md p-3 rounded-lg focus:outline-none">
+          <select id="services" class="w-full shadow-md p-3 rounded-lg focus:outline-none" required>
             <option data-i18n="inputServices"></option>
             <option data-i18n="inputOption1"></option>
             <option data-i18n="inputOption2"></option>
@@ -210,14 +242,14 @@
           <label for="address" class="block text-lg font-bold mb-2 text-[#468585]" data-i18n="inputAddress"></label>
           <div class="flex">
             <input type="text" id="address" class="shadow-md p-3 rounded-lg focus:outline-none w-full pr-10"
-              placeholder="Enter Address or get location" />
+              placeholder="Enter Address or get location" required />
             <i class="fa-sharp fa-solid absolute fa-location-dot absolute top-11 right-3 text-[#468585] text-2xl"></i>
           </div>
         </div>
       </div>
       <div class="justify-center flex mt-6">
         <div class="flex justify-center px-32 ">
-          <button class="bg-[#468585] text-white text-xl px-4 py-6 rounded-lg font-bold w-full text-nowrap"
+          <button onclick="" class="bg-[#468585] text-white text-xl px-4 py-6 rounded-lg font-bold w-full text-nowrap"
             data-i18n="inputBookanAppointment"></button>
         </div>
       </div>
@@ -403,15 +435,7 @@
 
 
 
-  <script>
-    // Toggle the mobile menu
-    document
-      .getElementById("menu-toggle")
-      .addEventListener("click", function () {
-        document.getElementById("menu").classList.toggle("hidden");
-      });
-  </script>
-  <script src="./js/featherlight.gallery.min.js"></script>
+
 </body>
 
 </html>
