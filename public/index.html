@@ -1,10 +1,12 @@
 <!DOCTYPE html>
-<html>
+<html id="main" lang="fi">
 <!-- TODO: Contact Us Not working phone number and email for contact us  -->
 <!-- TODO: Analaytics is not been update for safai.fi  -->
 
 <!-- TODO: Margin error -->
 <!-- TODO: Phone resizing error -->
+
+<!-- TODO: Adding the lang html tag for better exsibility -->
 
 <head>
   <meta charset="utf-8" />
@@ -61,7 +63,7 @@
   <script defer>
     document.addEventListener("DOMContentLoaded", async () => {
       // TODO: Change to the company's phone number
-      const phoneNumber = "+919897948055";
+      const phoneNumber = "+358 41 3115215";
 
       document.getElementById("language-toggle").addEventListener("change", (e) => {
         const lang = e.target.checked ? "en" : "fi";
@@ -79,6 +81,7 @@
         document.getElementById("language-toggle").checked = false;
         document.getElementById("fi").classList.add("hidden");
         document.getElementById("en").classList.remove("hidden");
+        // document.getElementById("main").
       } else {
         document.getElementById("language-toggle").checked = true;
         document.getElementById("en").classList.add("hidden");
@@ -98,7 +101,7 @@
         console.log(error + "The logic reason menu is hidden so it is not working");
       }
       document.getElementById("call-button").addEventListener("click", function () {
-        makeCall(+919897948055); // Replace with the actual phone number
+        makeCall("+358 41 3115215"); // Replace with the actual phone number
       });
 
       // call the person
@@ -109,7 +112,7 @@
       function sendEmail() {
         const name = document.getElementById('name').value;
         const phone = document.getElementById('phone').value;
-        const services = document.getElementById('services').value;
+        const services = document.getElementById('chooseService').value;
         const address = document.getElementById('address').value;
 
         const subject = encodeURIComponent('Appointment Booking');
@@ -206,7 +209,7 @@
 
   <!-- Hero section -->
   <section id="home"
-    class="bg-centre md:bg-cover bg-opacity-50 md:bg-[url('./assets/bg_1.jpg')] bg-cover bg-[url('./assets/bg_for_phone.jpg')] mx-auto h-screen"
+    class="h-screen bg-center md:bg-cover bg-opacity-50 md:bg-[url('./assets/bg_1.jpg')] bg-cover bg-[url('./assets/bg_for_phone.jpg')]"
     data-stellar-background-ratio="0.5">
     <div class="absolute inset-0"></div>
     <div class="container w-86 h-full flex items-center justify-start px-4 md:px-32 ">
@@ -220,7 +223,6 @@
     </div>
   </section>
 
-  <!---- Input Field  ---->
 
   <!-- Services section -->
   <section id="services" class="py-16  rounded-lg mx-4 md:mx-32 ">
@@ -278,6 +280,7 @@
       </div>
 
   </section>
+  <!---- Input Field  ---->
 
 
   <section id="appointment" class="py-6">
@@ -295,12 +298,19 @@
             placeholder="Phone number" required />
         </div>
         <div class="w-full md:w-1/5">
-          <label for="services" class="block text-lg font-bold mb-2 text-[#468585]" data-i18n="inputServices"></label>
-          <select id="services" class="w-full shadow-md p-3 rounded-lg focus:outline-none" required>
+          <label for="chooseService" class="block text-lg font-bold mb-2 text-[#468585]"
+            data-i18n="inputServices"></label>
+          <select id="chooseServices" class="w-full shadow-md p-3 rounded-lg focus:outline-none" required>
             <option data-i18n="inputServices"></option>
-            <option data-i18n="inputOption1"></option>
-            <option data-i18n="inputOption2"></option>
-            <option data-i18n="inputOption3"></option>
+            <option data-i18n="serviceOne"></option>
+            <option data-i18n="serviceTwo"></option>
+            <option data-i18n="serviceThree"></option>
+            <option data-i18n="serviceFour"></option>
+            <option data-i18n="serviceFive"></option>
+            <option data-i18n="serviceSix"></option>
+            <option data-i18n="serviceSeven"></option>
+            <option data-i18n="serviceEight"></option>
+            <option data-i18n="serviceNine"></option>
           </select>
         </div>
         <div class="w-full md:w-1/5 relative">
@@ -469,9 +479,6 @@
       </div>
     </div>
   </footer>
-
-  <!-- Add Font Awesome for social media icons -->
-  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 
 
 
