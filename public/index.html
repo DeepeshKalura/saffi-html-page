@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html id="main" lang="fi">
+<html lang="en">
 <!-- TODO: Contact Us Not working phone number and email for contact us  -->
 <!-- TODO: Analaytics is not been update for safai.fi  -->
 
@@ -13,9 +13,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Safai</title>
   <link rel="stylesheet" href="./css/styles.css" />
-
   <!-- Firebase SDK and other scripts -->
-  <script defer src="/__/firebase/10.12.4/firebase-app-compat.js"></script>
+  <!-- <script defer src="/__/firebase/10.12.4/firebase-app-compat.js"></script>
   <script defer src="/__/firebase/10.12.4/firebase-auth-compat.js"></script>
   <script defer src="/__/firebase/10.12.4/firebase-database-compat.js"></script>
   <script defer src="/__/firebase/10.12.4/firebase-firestore-compat.js"></script>
@@ -25,7 +24,7 @@
   <script defer src="/__/firebase/10.12.4/firebase-analytics-compat.js"></script>
   <script defer src="/__/firebase/10.12.4/firebase-remote-config-compat.js"></script>
   <script defer src="/__/firebase/10.12.4/firebase-performance-compat.js"></script>
-  <script defer src="/__/firebase/init.js?useEmulator=true"></script>
+  <script defer src="/__/firebase/init.js?useEmulator=true"></script> -->
 
   <script src="https://cdn.tailwindcss.com"></script>
 
@@ -34,17 +33,18 @@
     crossorigin="anonymous" referrerpolicy="no-referrer" />
 
   <!-- Google Analytics and Tag Manager -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-W6HYGV31E1"></script>
-  <script>
+  <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-W6HYGV31E1"></script> -->
+  <!-- <script>
+
     window.dataLayer = window.dataLayer || [];
     function gtag() {
       dataLayer.push(arguments);
     }
     gtag("js", new Date());
     gtag("config", "G-W6HYGV31E1");
-  </script>
+  </script> -->
 
-  <script>
+  <!-- <script>
     (function (w, d, s, l, i) {
       w[l] = w[l] || [];
       w[l].push({
@@ -58,7 +58,7 @@
       j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
       f.parentNode.insertBefore(j, f);
     })(window, document, "script", "dataLayer", "GTM-TPJ5KBRN");
-  </script>
+  </script> -->
 
   <script defer>
     document.addEventListener("DOMContentLoaded", async () => {
@@ -69,11 +69,12 @@
         const lang = e.target.checked ? "en" : "fi";
         changeLanguage(lang);
       });
-      document
-        .querySelectorAll(".phone-number")
-        .forEach((el) => (el.textContent = phoneNumber));
 
-      const userPreferredLanguage = localStorage.getItem("language") || "fi";
+      // document
+      //   .querySelectorAll(".phone-number")
+      //   .forEach((el) => (el.textContent = phoneNumber));
+
+      const userPreferredLanguage = localStorage.getItem("language") || "en";
 
 
       langData = await fetchLanguageData(userPreferredLanguage);
@@ -87,43 +88,13 @@
         document.getElementById("en").classList.add("hidden");
 
         document.getElementById("fi").classList.remove("hidden");
+        document.getElementById("navBar").classList.remove("md:px-32");
+        document.getElementById("navBar").classList.add("md:pl-32");
+        document.getElementById("navBar").classList.add("md:pr-28");
       }
       updateContent(langData);
 
-      //  Make a call to the user 
-      try {
-        document
-          .getElementById("menu-toggle")
-          .addEventListener("click", function () {
-            document.getElementById("menu").classList.toggle("hidden");
-          });
-      } catch (error) {
-        console.log(error + "The logic reason menu is hidden so it is not working");
-      }
-      document.getElementById("call-button").addEventListener("click", function () {
-        makeCall("+358 41 3115215"); // Replace with the actual phone number
-      });
-
-      // call the person
-      function makeCall(phoneNumber) {
-        window.location.href = `tel:${phoneNumber}`;
-      }
-
-      function sendEmail() {
-        const name = document.getElementById('name').value;
-        const phone = document.getElementById('phone').value;
-        const services = document.getElementById('chooseService').value;
-        const address = document.getElementById('address').value;
-
-        const subject = encodeURIComponent('Appointment Booking');
-        const body = encodeURIComponent(`Name: ${name}\nPhone: ${phone}\nServices: ${services}\nAddress: ${address}`);
-
-        const mailtoLink = `mailto:admin@safai.fi?subject=${subject}&body=${body}`;
-        window.location.href = mailtoLink;
-      }
-
     });
-
     function setLanguagePreference(lang) {
       localStorage.setItem("language", lang);
       location.reload();
@@ -148,41 +119,46 @@
     }
 
   </script>
+
+
+
 </head>
 
 <body>
   <!-- Google Tag Manager (noscript) -->
-  <noscript>
+  <!-- <noscript>
     <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TPJ5KBRN" height="0" width="0"
       style="display: none; visibility: hidden"></iframe>
-  </noscript>
+  </noscript> -->
 
   <!-- Top bar with contact info -->
-  <div class="bg-[#468585] py-2 px-4 md:px-32 text-white">
-    <div class="flex flex-col md:flex-row justify-between items-center">
+  <div class="bg-[#468585] py-2 px-4 md:px-32 text-white z-20 relative top-1">
+    <div class="flex flex-row justify-between items-center">
       <p class="text-sm md:text-base">
-        <a href="tel:+919897948055" class="hover:text-gray-300">+358 41 3115215</a>
-        |
-        <a href="mailto:admin@shafai.fi" class="hover:text-gray-300">info@shafai.fi</a>
+        <a href="tel:+919897948055" class="hidden md:inline hover:text-gray-300">+358 41 3115215 | </a>
+        <a href="mailto:info@safai.fi" class="hover:text-gray-300">info@safai.fi</a>
       </p>
       <div class="flex space-x-4 mt-2 md:mt-0">
-        <a href="#" class="hover:text-gray-300"><i class="fab fa-facebook"></i></a>
-        <a href="#" class="hover:text-gray-300"><i class="fab fa-twitter"></i></a>
-        <a href="https://www.instagram.com/safai.service/?igsh=eXNsc201bm1oMzYy" class="hover:text-gray-300"><i
-            class="fab fa-instagram"></i></a>
+        <a href="#" class="hover:text-gray-300" target="_blank" rel="noopener" title="facebookReference"><i
+            class="fab fa-facebook"></i></a>
+        <a href="#" class="hover:text-gray-300" target="_blank" rel="noopener" title="twitterReference"><i
+            class="fab fa-twitter"></i></a>
+        <a href="https://www.instagram.com/safai.service" class="hover:text-gray-300" target="_blank" rel="noopener"
+          title="instagramReference"><i class="fab fa-instagram"></i></a>
       </div>
     </div>
   </div>
 
   <!-- Navigation and header -->
   <header class="relative">
-    <nav class="bg-black md:bg-opacity-30 bg-opacity-80 backdrop-filter backdrop-blur-md sticky top-0 z-20">
-      <div class="container flex flex-wrap items-center justify-between py-4 px-4 md:px-32">
+    <nav class="bg-black md:bg-opacity-30 bg-opacity-80 backdrop-filter backdrop-blur-md sticky z-10 px-4 md:px-32"
+      id="navBar">
+      <div class="container flex flex-wrap items-center justify-between py-4">
         <div>
           <a href="#" class="text-2xl font-bold text-white">Safai</a>
         </div>
-        <button id="menu-toggle" class="text-white md:hidden" title="Toggle Menu"></button>
-        <i class="md:hidden text-white fas fa-bars"></i>
+        <button id="menu-toggle" type="button" class="text-white md:hidden" title="Toggle Menu">
+          <i class="md:hidden text-white fas fa-bars top z-10" title="toogleFeature"></i>
         </button>
         <div id="menu" class="hidden md:flex flex-col md:flex-row mt-4 md:mt-0 w-full md:w-auto">
           <a href="#home" class="block md:inline-block mr-0 md:mr-4 text-white hover:text-[#468585]" data-i18n="navHome"
@@ -193,26 +169,25 @@
             data-i18n="navServices" title="Services">Services</a>
           <a href="#gallery" class="block md:inline-block mr-0 md:mr-4 text-white hover:text-[#468585]"
             data-i18n="navAboutUs" title="Gallery">Gallery</a>
-          <!-- <a href="#contact" class="text-white hover:text-[#468585]" data-i18n="navContactUs">Contact</a> -->
+          <!-- TODO: I will add the language change UI Here   -->
         </div>
         <div class="relative inline-block w-16 align-middle select-none transition duration-200 ease-in">
           <label class="switch">
-            <input type="checkbox" id="language-toggle" class="hidden">
+            <input title="languageSwitch" type="checkbox" id="language-toggle" class="hidden">
             <span class="slider round block w-10 h-6 bg-gray-300 rounded-full shadow-inner"></span>
           </label>
           <span id="fi" class="hidden absolute left-[-25px] top-1 text-xs font-bold text-white">FN</span>
           <span id="en" class="absolute right-0 top-1 text-xs font-bold text-white ">EN</span>
         </div>
-      </div>
     </nav>
   </header>
 
   <!-- Hero section -->
   <section id="home"
-    class="h-screen bg-center md:bg-cover bg-opacity-50 md:bg-[url('./assets/bg_1.jpg')] bg-cover bg-[url('./assets/bg_for_phone.jpg')]"
+    class="h-screen bg-center md:bg-cover bg-opacity-50 md:bg-[url('./assets/bg_1.jpg')] bg-cover bg-[url('./assets/bg_for_phone.jpg')] z-0 relative"
     data-stellar-background-ratio="0.5">
     <div class="absolute inset-0"></div>
-    <div class="container w-86 h-full flex items-center justify-start px-4 md:px-32 ">
+    <div class="container w-86 h-full flex items-center justify-start px-4 md:px-32">
       <div class="bg-white bg-opacity-80 p-8 rounded-lg shadow-lg w-full md:w-1/2">
         <h1 class="text-4xl md:text-5xl font-bold mb-4 text-[#468585]" data-i18n="navTagline"></h1>
         <p class="text-lg md:text-xl mb-16" data-i18n="ourneedLine"></p>
@@ -223,9 +198,9 @@
     </div>
   </section>
 
-
   <!-- Services section -->
-  <section id="services" class="py-16  rounded-lg mx-4 md:mx-32 ">
+
+  <section id="services" class="py-16 rounded-lg mx-4 md:mx-32 ">
     <div class="container mx-auto">
       <h2 class="text-4xl font-bold mb-8 text-[#468585] text-center" data-i18n="offeringLine"></h2>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -280,13 +255,15 @@
       </div>
 
   </section>
+
+
   <!---- Input Field  ---->
-
-
-  <section id="appointment" class="py-6">
-    <div class="bg-gray-100  py-6 shadow-lg m-4 md:m-32 border-8 border-[#468585] rounded-lg border-dashed">
+  <!-- TODO: This was the padding error in the children  -->
+  <section id="appointment" class="py-6 px-4 md:px-32">
+    <div
+      class="bg-gray-100 shadow-lg border-8 border-[#468585] py-8 rounded-lg border-dashed max-w-screen-xl md:max-w-full">
       <h2 class="text-xl md:text-3xl font-bold mb-8 text-center text-[#468585]" data-i18n="inputBookanAppointment"></h2>
-      <div class="flex flex-wrap justify-between gap-4 px-4 py-4 md:px-32 mt-2">
+      <div class="flex flex-wrap justify-between gap-4 px-4 md:px-32 mt-2">
         <div class="w-full md:w-1/5">
           <label for="name" class="block text-lg font-bold mb-2 text-[#468585]" data-i18n="inputName"></label>
           <input type="text" id="name" class="w-full shadow-md p-3 rounded-lg focus:outline-none"
@@ -300,7 +277,8 @@
         <div class="w-full md:w-1/5">
           <label for="chooseService" class="block text-lg font-bold mb-2 text-[#468585]"
             data-i18n="inputServices"></label>
-          <select id="chooseServices" class="w-full shadow-md p-3 rounded-lg focus:outline-none" required>
+          <select title="safaiCompaniesServices" id="chooseServices"
+            class="w-full shadow-md p-3 rounded-lg focus:outline-none" required>
             <option data-i18n="inputServices"></option>
             <option data-i18n="serviceOne"></option>
             <option data-i18n="serviceTwo"></option>
@@ -323,15 +301,16 @@
         </div>
       </div>
       <div class="justify-center flex mt-6">
-        <div class="flex justify-center px-32 ">
-          <button onclick="" class="bg-[#468585] text-white text-xl px-4 py-6 rounded-lg font-bold w-full text-nowrap"
+        <div class="flex justify-center w-full px-4 md:px-16">
+          <button title="appointmentButtonWithUs" onclick=""
+            class="bg-[#468585] text-white text-xl px-4 py-3 rounded-lg font-bold w-full text-nowrap"
             data-i18n="inputBookanAppointment"></button>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- About Us section -->
+  <!-- About us: Section -->
   <section id="about" class="py-16 bg-white">
     <div class="container mx-auto text-center">
       <h2 class="text-3xl font-bold mb-8 text-[#468585]" data-i18n="aboutUsSection"></h2>
@@ -353,90 +332,9 @@
               alt="Landing Page" /></a>
         </aside>
       </div>
-      <!--End of Gallery-->
-
 
     </div>
   </section>
-
-  <!---- Testimonials  ---->
-  <section class="bg-gray-100 py-16">
-    <div class="flex justify-center mx-4 md:mx-32">
-      <div class="w-full max-w-6xl flex flex-col items-center py-12">
-        <p class="text-center text-3xl font-extrabold mb-16 text-[#468585]" data-i18n="Testimonialstext"></p>
-        <p data-i18n="Testimonialsline" class="text-center text-lg mb-12 max-w-lg text-[#468585]"></p>
-        <div class="flex flex-wrap justify-between w-full">
-          <div class="w-full sm:w-1/2 lg:w-1/3 mb-8 p-4 shadow-lg rounded-lg flex flex-col items-center">
-            <p class="text-lg mb-16" data-i18n="testimonialOne"></p>
-            <div class="flex items-center w-11/12">
-              <div class="flex-shrink-0">
-                <img class="w-16 h-16 rounded-full" src="./assets/person1.jpg" alt="Profile Image" />
-              </div>
-              <div class="ml-4">
-                <p data-i18n="authorOne" class="text-lg font-extrabold text-[#468585]"></p>
-                <p data-i18n="locationOne" class="text-sm text-[#468585]"></p>
-              </div>
-            </div>
-          </div>
-          <div class="w-full sm:w-1/2 lg:w-1/3 mb-8 p-4 shadow-lg rounded-lg flex flex-col items-center">
-            <p data-i18n="testimonialTwo" class="text-lg mb-16"></p>
-            <div class="flex items-center w-11/12">
-              <div class="flex-shrink-0">
-                <img class="w-16 h-16 rounded-full" src="./assets/person2.png" alt="Profile Image" />
-              </div>
-              <div class="ml-4">
-                <p data-i18n="authorTwo" class="text-lg font-extrabold text-[#468585]"></p>
-                <p data-i18n="locationTwo" class="text-sm text-[#468585]"></p>
-              </div>
-            </div>
-          </div>
-          <div class="w-full sm:w-1/2 lg:w-1/3 mb-8 p-4 shadow-lg rounded-lg flex flex-col items-center">
-            <p data-i18n="testimonialThree" class="text-lg mb-16"></p>
-            <div class="flex items-center w-11/12">
-              <div class="flex-shrink-0">
-                <img class="w-16 h-16 rounded-full" src="./assets/person3.jpg" alt="Profile Image" />
-              </div>
-              <div class="ml-4">
-                <p class="text-lg font-extrabold text-[#468585]" data-i18n="authorThree"></p>
-                <p data-i18n="locationThree" class="text-sm text-[#468585]"></p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Contact Us section -->
-  <!-- <section id="contact" class="py-16 bg-gray-100">
-    <div class="container mx-auto">
-      <h2 class="text-3xl font-bold mb-8 text-center text-[#468585]">
-        Contact Us
-      </h2>
-      <form class="max-w-lg mx-auto bg-white p-8 rounded-lg shadow-lg">
-        <div class="mb-4">
-          <label for="name" class="block text-lg font-bold mb-2">Name</label>
-          <input type="text" id="name" class="w-full border border-gray-300 p-3 rounded-lg" required />
-        </div>
-        <div class="mb-4">
-          <label for="email" class="block text-lg font-bold mb-2">Email</label>
-          <input type="email" id="email" class="w-full border border-gray-300 p-3 rounded-lg" required />
-        </div>
-        <div class="mb-4">
-          <label for="message" class="block text-lg font-bold mb-2 resize-none">Message</label>
-          <textarea id="message" class="w-full border border-gray-300 p-3 rounded-lg" rows="4" required></textarea>
-        </div>
-        <div class="flex justify-center">
-          <button type="submit" class="bg-[#468585] text-white py-3 px-6 rounded-lg font-semibold "
-            data-i18n="buttonEndMessage">
-          </button>
-        </div>
-      </form>
-      <p class="text-center mt-8">
-        Or call us now at: <span class="phone-number font-bold"></span>
-      </p>
-    </div>
-  </section> -->
 
   <!-- TODO: Need a better designing for footer -->
   <!-- Footer -->
@@ -448,11 +346,11 @@
           <p class="text-base text-left"> Safai is a modern and eco-friendly cleaning company, offering
             top-notch cleaning services for homes, offices, and public spaces.</p>
           <ul class="flex justify-content-start md:justify-center space-x-4 my-2">
-            <li><a href="#" class="text-white"><i class="fab fa-facebook-f"></i></a></li>
-            <li><a href="#" class="text-white"><i class="fab fa-twitter"></i></a></li>
-            <li><a href="https://www.instagram.com/safai.service/?igsh=eXNsc201bm1oMzYy" class="text-white"><i
-                  class="fab fa-instagram"></i></a></li>
-            <li><a href="#" class="text-white"><i class="fab fa-linkedin-in"></i></a></li>
+            <li><a href="#" class="text-white" title="facebookReference"><i class="fab fa-facebook-f"></i></a></li>
+            <li><a href="#" class="text-white" title="twitterReference"><i class="fab fa-twitter"></i></a></li>
+            <li><a href="https://www.instagram.com/safai.service/?igsh=eXNsc201bm1oMzYy" class="text-white"
+                title="instagramReference"><i class="fab fa-instagram"></i></a></li>
+            <!-- <li><a href="#" class="text-white"><i class="fab fa-linkedin-in"></i></a></li> -->
           </ul>
         </div>
         <div>
@@ -474,15 +372,16 @@
       </div>
       <div class="mt-8 text-sm md:text-base px-3">
         <p>&copy; 2024 Safai. All rights reserved | Code is written <i class="fa fa-heart" aria-hidden="true"></i> by <a
-            href="https://www.linkedin.com/in/deepeshkalura/" target="_blank" title="codeRefrence">Deepesh Kalura</a>
+            rel="noopener" href="https://www.linkedin.com/in/deepeshkalura/" target="_blank"
+            title="codeRefrence">Deepesh Kalura</a>
         </p>
       </div>
     </div>
   </footer>
 
 
-
-
+  <!-- INFO Whatever script will used later I will put here created will go here -->
+  <script src="./js/main.js"></script>
 </body>
 
 </html>
