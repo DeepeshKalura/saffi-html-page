@@ -64,3 +64,58 @@
 .bg-darker-green {
     background-color: #468585;
 }
+
+
+
+/* Footer */
+
+.wa-footer {
+    position: fixed;
+    bottom: -100px;
+    /* Initially off-screen */
+    right: 20px;
+    width: 70px;
+    height: 70px;
+    background-color: #25d366;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: wa-anim .5s ease-out 1s forwards;
+}
+
+.wa-footer::before {
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: #90ee90;
+    border-radius: 50%;
+    content: "";
+    z-index: -1;
+    transform: scale(0);
+    pointer-events: none;
+    animation: wa-anim-glow 1.5s ease-out 3s infinite;
+}
+
+@keyframes wa-anim {
+    to {
+        bottom: 20px;
+        /* Final position on screen */
+    }
+}
+
+@keyframes wa-anim-glow {
+
+    0%,
+    100% {
+        transform: scale(0);
+        opacity: 1;
+    }
+
+    50% {
+        transform: scale(1);
+        opacity: 0;
+    }
+}

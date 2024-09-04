@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Safai Instant Quote</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script defer>
+        document.addEventListener("DOMContentLoaded", async () => {
+            const userPreferredLanguage = localStorage.getItem("language") || "en";
+
+            // Fetch and set initial language data
+            const langData = await fetchLanguageData(userPreferredLanguage);
+            setLanguageToggle(userPreferredLanguage);
+            updateContent(langData);
+
+            // Event listener for language toggle in the main navbar
+            document.getElementById("language-toggle").addEventListener("change", (e) => {
+                const lang = e.target.checked ? "en" : "fi";
+                changeLanguage(lang);
+            });
+
+            // Event listener for language toggle in the sidebar
+            document.getElementById("language-toggle-sidebar").addEventListener("change", (e) => {
+                const lang = e.target.checked ? "en" : "fi";
+                changeLanguage(lang);
+            });
+
+            function setLanguageToggle(lang) {
+                const isEnglish = lang === "en";
+
+                document.getElementById("language-toggle").checked = isEnglish;
+                document.getElementById("language-toggle-sidebar").checked = isEnglish;
+
+                if (isEnglish) {
+                    document.getElementById("en").classList.add("hidden");
+                    document.getElementById("fi").classList.remove("hidden");
+                    document.getElementById("en-sidebar").classList.add("hidden");
+                    document.getElementById("fi-sidebar").classList.remove("hidden");
+
+                    // Adjust navbar padding
+                    document.getElementById("navBar").classList.remove("md:px-32");
+                    document.getElementById("navBar").classList.add("md:pl-32");
+                    document.getElementById("navBar").classList.add("md:pr-28");
+                } else {
+                    document.getElementById("fi").classList.add("hidden");
+                    document.getElementById("en").classList.remove("hidden");
+                    document.getElementById("fi-sidebar").classList.add("hidden");
+                    document.getElementById("en-sidebar").classList.remove("hidden");
+
+                    // Reset navbar padding to original state
+                    document.getElementById("navBar").classList.add("md:px-32");
+                    document.getElementById("navBar").classList.remove("md:pl-32");
+                    document.getElementById("navBar").classList.remove("md:pr-28");
+                }
+            }
+
+            async function changeLanguage(lang) {
+                setLanguagePreference(lang);
+                const langData = await fetchLanguageData(lang);
+                updateContent(langData);
+            }
+
+            function setLanguagePreference(lang) {
+                localStorage.setItem("language", lang);
+                location.reload();
+            }
+
+            function updateContent(langData) {
+                document.querySelectorAll("[data-i18n]").forEach((element) => {
+                    const key = element.getAttribute("data-i18n");
+                    element.textContent = langData[key];
+                });
+            }
+
+            async function fetchLanguageData(lang) {
+                const response = await fetch(`language/${lang}.json`);
+                return response.json();
+            }
+        });
+
+    </script>
+
+</head>
+
+<body>
+
+    <div class="bg-[#468585] py-2 px-4 md:px-32 text-white z-20 relative ">
+        <div class="flex flex-row justify-between items-center">
+            <p class="text-sm md:text-base">
+                <a href="tel:+358413115215" class="inline hover:text-gray-300">+358 41 3115215 | </a>
+                <a href="mailto:info@safai.fi" class="hover:text-gray-300">info@safai.fi</a>
+            </p>
+            <div class="flex space-x-4 mt-2 md:mt-0">
+                <a href="#" class="hover:text-gray-300" target="_blank" rel="noopener" title="facebookReference"><i
+                        class="fab fa-facebook"></i></a>
+                <a href="#" class="hover:text-gray-300" target="_blank" rel="noopener" title="twitterReference"><i
+                        class="fab fa-twitter"></i></a>
+                <a href="https://www.instagram.com/safai.service" class="hover:text-gray-300" target="_blank"
+                    rel="noopener" title="instagramReference"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation and header -->
+    <header class="relative">
+        <nav class="bg-black md:bg-opacity-30 bg-opacity-40 backdrop-filter backdrop-blur-md sticky z-10 px-4 md:px-32"
+            id="navBar">
+            <div class="container flex flex-wrap items-center justify-between py-4">
+                <div>
+                    <a href="#" class="text-2xl font-bold text-white">Safai</a>
+                </div>
+                <button id="menu-toggle" type="button" class="text-white md:hidden" title="Toggle Menu">
+                    <i class="md:hidden text-white fas fa-bars top z-10" title="toogleFeature"></i>
+                </button>
+                <div id="menu" class="hidden md:flex flex-col md:flex-row mt-4 md:mt-0 w-full md:w-auto">
+                    <a href="#home" class="block md:inline-block mr-0 md:mr-4 text-white hover:text-[#468585]"
+                        data-i18n="navHome" title="Home">Home</a>
+                    <a href="#appointment" class="block md:inline-block mr-0 md:mr-4 text-white hover:text-[#468585]"
+                        data-i18n="navAppointment" title="Appointment">Appointment</a>
+                    <a href="#services" class="block md:inline-block mr-0 md:mr-4 text-white hover:text-[#468585]"
+                        data-i18n="navServices" title="Services">Services</a>
+                    <a href="#gallery" class="block md:inline-block mr-0 md:mr-4 text-white hover:text-[#468585]"
+                        data-i18n="navAboutUs" title="Gallery">Gallery</a>
+                </div>
+                <div
+                    class="hidden relative md:inline-block w-16 align-middle select-none transition duration-200 ease-in">
+                    <label class="switch">
+                        <input title="languageSwitch" type="checkbox" id="language-toggle" class="hidden">
+                        <span class="slider round block w-10 h-6 bg-gray-300 rounded-full shadow-inner"></span>
+                    </label>
+                    <span id="fi" class="hidden absolute left-[-25px] top-1 text-xs font-bold text-white">FN</span>
+                    <span id="en" class="absolute right-0 top-1 text-xs font-bold text-white ">EN</span>
+                </div>
+        </nav>
+    </header>
+
+    <!-- Sidebar for mobile -->
+    <div id="sidebar"
+        class="fixed inset-0 bg-black bg-opacity-75 z-30 transform translate-x-full transition-transform duration-300 ease-in-out">
+        <div class="flex flex-col h-full w-3/4 max-w-xs bg-[#468585] p-4 ml-auto">
+            <button id="close-sidebar" class="self-end text-white text-2xl mb-6" title="Close Menu">&times;</button>
+            <a href="#home" class="text-white text-lg mb-4 hover:text-gray-300" title="Home">Home</a>
+            <a href="#appointment" class="text-white text-lg mb-4 hover:text-gray-300"
+                title="Appointment">Appointment</a>
+            <a href="#services" class="text-white text-lg mb-4 hover:text-gray-300" title="Services">Services</a>
+            <a href="#gallery" class="text-white text-lg mb-4 hover:text-gray-300" title="Gallery">Gallery</a>
+            <div class="relative mt-auto">
+                <label class="switch">
+                    <input title="languageSwitch" type="checkbox" id="language-toggle-sidebar" class="hidden">
+                    <span class="slider round block w-10 h-6 bg-gray-300 rounded-full shadow-inner"></span>
+                </label>
+                <span id="fi-sidebar" class="hidden absolute right-0 top-1 text-xs font-bold text-white">FN</span>
+                <span id="en-sidebar" class="absolute right-0 top-1 text-xs font-bold text-white ">EN</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Service Section -->
+    <section id="services" class="py-16 rounded-lg mx-4 md:mx-32  ">
+        <div class="container">
+            <h2 class="text-4xl font-bold mb-8 text-[#468585] text-center" data-i18n="offeringLine"></h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-white rounded-lg shadow-lg">
+                    <img src="./assets/image_3.jpg" alt="Residential Cleaning Image" class="rounded-lg">
+                    <h3 class="text-xl px-8 py-2 md:text-2xl font-bold mb-0 md:mb-4 mt-4" data-i18n="serviceOne">
+                    </h3>
+                    <p class="text-base px-8 py-2 md:text-xl" data-i18n="serviceOneAbout"></p>
+                    <button href="./services/home-cleaning.html"
+                        class="text-xl justify-center md:text-3xl my-2 w-full px-6  font-bold bg-[#468585] text-white py-2  rounded-lg">Explore
+                    </Button>
+
+                </div>
+                <div class="i bg-white rounded-lg shadow-lg">
+                    <img src="./assets/image_4.jpg" alt="Commercial Cleaning Image" class="rounded-lg">
+                    <h3 class="text-xl px-8 py-2 md:text-2xl font-bold mb-0 md:mb-4 mt-4" data-i18n="serviceTwo"></h3>
+                    <p class="text-base px-8 py-2 md:text-xl" data-i18n="serviceTwoAbout"></p>
+                    <button href="./services/home-cleaning.html"
+                        class="text-xl justify-center md:text-3xl my-2 w-full px-6  font-bold bg-[#468585] text-white py-2  rounded-lg">Explore
+                    </Button>
+
+                </div>
+                <div class="i bg-white rounded-lg shadow-lg">
+                    <img src="./assets/image_2.jpg" alt="Deep Cleaning" class="rounded-lg">
+                    <h3 class="text-xl px-8 py-2 md:text-2xl font-bold mb-0 md:mb-4 mt-4" data-i18n="serviceThree"></h3>
+                    <p class="text-base px-8 py-2 md:text-xl" data-i18n="serviceThreeAbout"></p>
+                    <button href="./services/home-cleaning.html"
+                        class="text-xl justify-center md:text-3xl my-2 w-full px-6  font-bold bg-[#468585] text-white py-2  rounded-lg">Explore
+                    </Button>
+
+                </div>
+                <div class="i bg-white rounded-lg shadow-lg">
+                    <img src="./assets/image_5.png" alt="Stair Cleaning Image" class="rounded-lg">
+                    <h3 class="text-xl px-8 py-2 md:text-2xl font-bold mb-0 md:mb-4 mt-4" data-i18n="serviceFour">
+                    </h3>
+                    <p class="text-base px-8 py-2 md:text-xl" data-i18n="serviceFourAbout"></p>
+                    <button href="./services/home-cleaning.html"
+                        class="text-xl justify-center md:text-3xl my-2 w-full px-6  font-bold bg-[#468585] text-white py-2  rounded-lg">Explore
+                    </Button>
+
+                </div>
+                <div class="i bg-white rounded-lg shadow-lg">
+                    <img src="./assets/image_6.png" alt="Carpit Cleaning Image" class="rounded-lg">
+                    <h3 class="text-xl px-8 py-2 md:text-2xl font-bold mb-0 md:mb-4 mt-4" data-i18n="serviceFive"></h3>
+                    <p class="text-base px-8 py-2 md:text-xl" data-i18n="serviceFiveAbout"></p>
+                    <button href="./services/home-cleaning.html"
+                        class="text-xl justify-center md:text-3xl my-2 w-full px-6  font-bold bg-[#468585] text-white py-2  rounded-lg">Explore
+                    </Button>
+
+                </div>
+                <div class="i bg-white rounded-lg shadow-lg">
+                    <img src="./assets/image_7.png" alt="Office Cleanning Image" class="rounded-lg">
+                    <h3 class="text-xl px-8 py-2 md:text-2xl font-bold mb-0 md:mb-4 mt-4" data-i18n="serviceSix"></h3>
+                    <p class="text-base px-8 py-2 md:text-xl" data-i18n="serviceSixAbout"></p>
+                    <button href="./services/home-cleaning.html"
+                        class="text-xl justify-center md:text-3xl my-2 w-full px-6  font-bold bg-[#468585] text-white py-2  rounded-lg">Explore
+                    </Button>
+
+                </div>
+                <div class="i bg-white rounded-lg shadow-lg">
+                    <img src="./assets/image_8.png" alt="Moving Cleaning Image" class="rounded-lg">
+                    <h3 class="text-xl px-8 py-2 md:text-2xl font-bold mb-0 md:mb-4 mt-4" data-i18n="serviceSeven">
+                    </h3>
+                    <p class="text-base px-8 py-2 md:text-xl" data-i18n="serviceSevenAbout"></p>
+                    <button href="./services/home-cleaning.html"
+                        class="text-xl justify-center md:text-3xl my-2 w-full px-6  font-bold bg-[#468585] text-white py-2  rounded-lg">Explore
+                    </Button>
+
+                </div>
+                <div class="i bg-white rounded-lg shadow-lg">
+                    <img src="./assets/image_9.png" alt="Restaurant Cleaning Image" class="rounded-lg">
+                    <h3 class="text-xl px-8 py-2 md:text-2xl font-bold mb-0 md:mb-4 mt-4" data-i18n="serviceEight"></h3>
+                    <p class="text-base px-8 py-2 md:text-xl" data-i18n="serviceEightAbout"></p>
+                    <button href="./services/home-cleaning.html"
+                        class="text-xl justify-center md:text-3xl bottom-1 w-full px-6  font-bold bg-[#468585] text-white py-2  rounded-lg">Explore
+                    </Button>
+
+                </div>
+                <div class="i bg-white rounded-lg shadow-lg">
+                    <img src="./assets/image_10.png" alt="Event/Party Room Cleaning Image" class="rounded-lg">
+                    <h3 class="text-xl px-8 py-2 md:text-2xl font-bold mb-0 md:mb-4 mt-4" data-i18n="serviceNine"></h3>
+                    <p class="text-base px-8 py-2 md:text-xl" data-i18n="serviceNineAbout"></p>
+                    <button href="./services/home-cleaning.html"
+                        class="text-xl justify-center md:text-3xl  w-full px-6  font-bold bg-[#468585] text-white py-2  rounded-lg">Explore
+                    </Button>
+
+                </div>
+            </div>
+
+    </section>
+
+    <footer class="bg-[#468585] text-white py-8">
+        <div class="container mx-auto max-w-screen-lg px-4 md:px-8 text-left md:text-center">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                    <h3 class="text-lg font-bold mb-2">Safai</h3>
+                    <p class="text-base text-left">Safai is a modern and eco-friendly cleaning company, offering
+                        top-notch cleaning services for homes, offices, and public spaces.</p>
+                    <ul class="flex justify-start md:justify-center space-x-4 my-2">
+                        <li><a href="#" class="text-white" title="facebookReference"><i
+                                    class="fab fa-facebook-f"></i></a></li>
+                        <li><a href="#" class="text-white" title="twitterReference"><i class="fab fa-twitter"></i></a>
+                        </li>
+                        <li><a href="https://www.instagram.com/safai.service/?igsh=eXNsc201bm1oMzYy" class="text-white"
+                                title="instagramReference"><i class="fab fa-instagram"></i></a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-bold mb-2">Have a Question?</h3>
+                    <span>1234 Street Name</span>
+                    <p>City, State, ZIP</p>
+                    <p>Email: <a href="mailto:info@safai.com" class="text-white underline">info@safai.com</a></p>
+                </div>
+                <div>
+                    <h3 class="text-lg font-bold mb-2">Quick Links</h3>
+                    <ul>
+                        <li><a href="#home" class="text-white underline">Home</a></li>
+                        <li><a href="#about" class="text-white underline">About Us</a></li>
+                        <li><a href="#services" class="text-white underline">Services</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="mt-8 text-sm md:text-base">
+                <p>&copy; 2024 Safai. All rights reserved | Code is written <i class="fa fa-heart"
+                        aria-hidden="true"></i> by <a rel="noopener" href="https://www.linkedin.com/in/deepeshkalura/"
+                        target="_blank" title="codeRefrence">Deepesh Kalura</a>
+                </p>
+            </div>
+            <a href="https://wa.me/358403511123" class="wa-footer fixed bottom-4 right-4"
+                title="oneOfTheMazorCallToActionToWhatApp">
+                <i class="fab fa-whatsapp text-white text-4xl"></i>
+            </a>
+
+
+        </div>
+    </footer>
+
+</body>
+
+</html>
